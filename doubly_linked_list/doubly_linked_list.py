@@ -149,6 +149,4 @@ class DoublyLinkedList:
       if i.value < next.value:
         got_max = next.value
       i = next
-    if got_max < self.tail.value:
-      got_max = self.tail.value
     return got_max
