@@ -140,4 +140,15 @@ class DoublyLinkedList:
       return val
     
   def get_max(self):
-    pass
+    if self.head is None and self.tail is None:
+      return None
+    got_max = self.head.value
+    i = self.head
+    while i != self.tail:
+      next = i.next
+      if i.value < next.value:
+        got_max = next.value
+      i = next
+    if got_max < self.tail.value:
+      got_max = self.tail.value
+    return got_max
