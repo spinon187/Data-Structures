@@ -85,7 +85,7 @@ class DoublyLinkedList:
   def remove_from_tail(self):
     if self.head is None and self.tail is None:
       return None
-    if self.length == 1:
+    elif self.length == 1:
       val = self.tail.value
       self.tail.delete()
       self.length -= 1
@@ -100,13 +100,44 @@ class DoublyLinkedList:
       return self.tail.value
 
   def move_to_front(self, node):
-    pass
+    stored = node.value
+    if self.head == node:
+      self.remove_from_tail()
+      self.add_to_head(stored)
+    else:
+      node.delete()
+      self.length -= 1
+      self.add_to_head(stored)
 
   def move_to_end(self, node):
-    pass
+    stored = node.value
+    if self.head == node:
+      self.remove_from_head()
+      self.add_to_tail(stored)
+    else:
+      node.delete()
+      self.length -= 1
+      self.add_to_tail(stored)
 
   def delete(self, node):
-    pass
+    if self.head is None and self.tail is None:
+      return None
+    elif self.length == 1:
+      val = node.value
+      node.delete()
+      self.length -= 1
+      self.head = None
+      self.tail = None
+      return val
+    elif self.head == node:
+      self.remove_from_head()
+    elif self.tail == node:
+      self.remove_from_tail()
+    else:
+      val = node.value
+      node.delete()
+      self.length -= 1
+      return val
     
   def get_max(self):
     pass
