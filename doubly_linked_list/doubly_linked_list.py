@@ -44,25 +44,109 @@ class DoublyLinkedList:
     return self.length
 
   def add_to_head(self, value):
-    pass
+    if not self.head and not self.tail:
+      self.head = ListNode(value)
+      self.tail = self.head
+      self.length += 1
+    else:
+      self.head.insert_before(value)
+      self.head = self.head.prev
+      self.length += 1
+      return self.head.value
 
   def remove_from_head(self):
-    pass
+    if self.head is None and self.tail is None:
+      return None
+    if self.length == 1:
+      val = self.head.value
+      self.head.delete()
+      self.length -= 1
+      self.head = None
+      self.tail = None
+      return val
+    else:
+      next_head = self.head.next
+      self.head.delete()
+      self.head = next_head
+      self.length -= 1
+      return self.head.value
 
   def add_to_tail(self, value):
-    pass
+    if not self.head and not self.tail:
+      self.head = ListNode(value)
+      self.tail = self.head
+      self.length += 1
+    else:
+      self.tail.insert_after(value)
+      self.tail = self.tail.next
+      self.length += 1
+      return self.tail.value
 
   def remove_from_tail(self):
-    pass
+    if self.head is None and self.tail is None:
+      return None
+    elif self.length == 1:
+      val = self.tail.value
+      self.tail.delete()
+      self.length -= 1
+      self.head = None
+      self.tail = None
+      return val
+    else:
+      next_tail = self.tail.prev
+      self.tail.delete()
+      self.tail = next_tail
+      self.length -= 1
+      return self.tail.value
 
   def move_to_front(self, node):
-    pass
+    stored = node.value
+    if self.head == node:
+      self.remove_from_tail()
+      self.add_to_head(stored)
+    else:
+      node.delete()
+      self.length -= 1
+      self.add_to_head(stored)
 
   def move_to_end(self, node):
-    pass
+    stored = node.value
+    if self.head == node:
+      self.remove_from_head()
+      self.add_to_tail(stored)
+    else:
+      node.delete()
+      self.length -= 1
+      self.add_to_tail(stored)
 
   def delete(self, node):
-    pass
+    if self.head is None and self.tail is None:
+      return None
+    elif self.length == 1:
+      val = node.value
+      node.delete()
+      self.length -= 1
+      self.head = None
+      self.tail = None
+      return val
+    elif self.head == node:
+      self.remove_from_head()
+    elif self.tail == node:
+      self.remove_from_tail()
+    else:
+      val = node.value
+      node.delete()
+      self.length -= 1
+      return val
     
   def get_max(self):
-    pass
+    if self.head is None and self.tail is None:
+      return None
+    got_max = self.head.value
+    i = self.head
+    while i != self.tail:
+      next = i.next
+      if i.value < next.value:
+        got_max = next.value
+      i = next
+    return got_max
