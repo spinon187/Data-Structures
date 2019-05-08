@@ -10,11 +10,17 @@ class Heap:
     pass
 
   def get_max(self):
-    if (len(self.storage) != 0):
+    if len(self.storage) > 0:
       return self.storage[0]
+    else:
+      return None
 
   def get_size(self):
-    pass
+    if len(self.storage) > 0:
+      return len(self.storage)
+    else:
+      return None
+    # pass
 
   def _bubble_up(self, i):
     while i > 0:
