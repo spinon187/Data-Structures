@@ -48,6 +48,7 @@ class DoublyLinkedList:
       self.head = ListNode(value)
       self.tail = self.head
       self.length += 1
+      return self.head.value
     else:
       self.head.insert_before(value)
       self.head = self.head.prev
